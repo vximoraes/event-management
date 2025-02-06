@@ -1,9 +1,9 @@
 import { User } from './../models/userModel'
 import sqlite3 from "sqlite3"
 
-const db = new sqlite3.Database('./data/eventos.db')
+const db = new sqlite3.Database('./data/database.db')
 
-export function createUserTable() {
+export function createUserTableDb() {
     const query = `
         CREATE TABLE IF NOT EXISTS users (
             id         INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -13,28 +13,16 @@ export function createUserTable() {
         )
     `
 
-    db.run(query, (error) => {
-        if (error) {
-            console.log(`Erro ao criar a tabela: ${error}`)
-        } else {
-            console.log(`Tabela criada com sucesso!`)
-        }
-    })
+    db.run(query)
 }
 
-export function insertUser(user: User): void {
+export function createUserDb(user: User): void {
     const query = `
         INSERT INTO users (name, email, password)
         VALUES (?, ?, ?)
     `
 
-    db.run(query, [user.name, user.email, user.password], function (error) {
-        if (error) {
-            console.log(`Erro ao inserir usuário: ${error}`)
-        } else {
-            console.log(`Usuário ${this.lastID} inserido com sucesso!`)
-        }
-    })
+    db.run(query, [user.name, user.email, user.password])
 }
 
 export function listAllUsers() {
