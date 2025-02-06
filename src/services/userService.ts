@@ -67,20 +67,20 @@ export function listUserById(id: number) {
     })
 }
 
-export function updateUserById(id: number, user: User) {
+export function updateUserById(user: User) {
     const query = `
         UPDATE users 
         SET name = ?, email = ?, password = ?
         WHERE id = ?
     `
 
-    db.run(query, [user.name, user.email, user.password, id], function (error) {
+    db.run(query, [user.name, user.email, user.password, user.id], function (error) {
         if (error) {
             console.log(`Erro ao alterar usuário: ${error}`)
         } else if (this.changes === 0) {
-            console.log(`Nenhum usuário encontrado pelo id ${id}`) 
+            console.log(`Nenhum usuário encontrado pelo id ${user.id}`) 
         } else {
-            console.log(`Usuário ${id} alterado com sucesso!`)
+            console.log(`Usuário ${user.id} alterado com sucesso!`)
         }
     })
 }
