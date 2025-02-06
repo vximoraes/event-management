@@ -97,7 +97,7 @@ export function updateEventById(event: Event) {
 
 export function deleteEvent(id: number) {
     const query = `
-        DELETE FROM event WHERE id = ?
+        DELETE FROM events WHERE id = ?
     `
 
     db.run(query, [id], function (erro) {
