@@ -1,0 +1,28 @@
+{
+  "name": "event-management",
+  "version": "1.0.0",
+  "description": "Aplicação em TypeScript para gerenciamento de eventos e usuários, com banco de dados SQLite. 🇧🇷",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vximoraes/event-management.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vximoraes/event-management/issues"
+  },
+  "homepage": "https://github.com/vximoraes/event-management#readme",
+  "dependencies": {
+    "sqlite3": "^5.1.7",
+    "ts-node": "^10.9.2",
+    "zod": "^3.24.1"
+  }
+}
