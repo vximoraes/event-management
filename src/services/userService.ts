@@ -59,19 +59,22 @@ export function listAllUsersDb(): Promise<any[]> {
     })
 }
 
-export function listUserByIdDb(id: number) {
+// Funcionando
+export function listUserByIdDb(id: number): Promise<any> {
     const query = `
         SELECT * FROM users WHERE id = ?
     `
 
-    db.get(query, [id], (error, linha) => {
-        if (error) {
-            console.log(`Erro ao listar usuário: ${error}`)
-        } else if (linha) {
-            console.log(linha)
-        } else {
-            console.log(`Nenhum usuário encontrado pelo id ${id}`)
-        }
+    return new Promise((resolve, rejected) => {
+        db.get(query, [id], (error, row) => {
+            if (error) {
+                rejected(error)
+            } else if (row) {
+                resolve(row)
+            } else {
+                resolve(null)
+            }
+        })
     })
 }
 
