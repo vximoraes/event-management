@@ -1,6 +1,5 @@
-import { createUser, createUserTable } from "./controllers/userController";
-import { listAllUsers } from "./services/userService";
+import { createUser, createUserTable, listAllUsers } from "./controllers/userController";
 
 createUserTable()
-createUser("", "viniciusmoraesvhagmail.com", "Senha123456")
+//createUser("Vini", "vinicius@gmail.com", "12345678@Senha")
 listAllUsers()
