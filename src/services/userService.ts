@@ -3,7 +3,8 @@ import sqlite3 from "sqlite3"
 
 const db = new sqlite3.Database('./data/database.db')
 
-export function createUserTableDb() {
+// Funcionando
+export function createUserTableDb(): Promise<boolean> {
     const query = `
         CREATE TABLE IF NOT EXISTS users (
             id         INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -13,33 +14,52 @@ export function createUserTableDb() {
         )
     `
 
-    db.run(query)
+    return new Promise((resolve, reject) => {
+        db.run(query, (error) => {
+            if (error) {
+                reject(error)
+            } else {
+                resolve(true)
+            }
+        })
+    })
 }
 
-export function createUserDb(user: User): void {
+// Funcionando
+export function createUserDb(user: User): Promise<boolean> {
     const query = `
         INSERT INTO users (name, email, password)
         VALUES (?, ?, ?)
     `
 
-    db.run(query, [user.name, user.email, user.password])
+    return new Promise((resolve, reject) => {
+        db.run(query, [user.name, user.email, user.password], function (error) {
+            if (error) {
+                reject(error)
+            } else {
+                resolve(true)
+            }
+        })
+    })
 }
 
-export function listAllUsers() {
+// Funcionando
+export function listAllUsersDb(): Promise<any[]> {
     const query = `
         SELECT * FROM users
     `
 
-    db.all(query, (error, linhas) => {
-        if (error) {
-            console.log(`Erro ao listar usuários: ${error}`)
-        } else {
-            console.log(linhas)
-        }
+    return new Promise((resolve, reject) => {
+        db.all(query, (error, rows) => {
+            if (error) {
+                reject(error)
+            }
+            resolve(rows)
+        })
     })
 }
 
-export function listUserById(id: number) {
+export function listUserByIdDb(id: number) {
     const query = `
         SELECT * FROM users WHERE id = ?
     `
@@ -55,7 +75,7 @@ export function listUserById(id: number) {
     })
 }
 
-export function updateUserById(user: User) {
+export function updateUserByIdDb(user: User) {
     const query = `
         UPDATE users 
         SET name = ?, email = ?, password = ?
@@ -66,14 +86,14 @@ export function updateUserById(user: User) {
         if (error) {
             console.log(`Erro ao alterar usuário: ${error}`)
         } else if (this.changes === 0) {
-            console.log(`Nenhum usuário encontrado pelo id ${user.id}`) 
+            console.log(`Nenhum usuário encontrado pelo id ${user.id}`)
         } else {
             console.log(`Usuário ${user.id} alterado com sucesso!`)
         }
     })
 }
 
-export function deleteUser(id: number) {
+export function deleteUserDb(id: number) {
     const query = `
         DELETE FROM users WHERE id = ?
     `
