@@ -1,21 +1,21 @@
 import { validateUser } from '../validations/userValidation'
-import { createUserDb, createUserTableDb, listAllUsersDb } from '../services/userService'
+import { createUserDb, createUserTableDb, listAllUsersDb, listUserByIdDb } from '../services/userService'
 import { User } from '../models/userModel'
+import { getCurrentTime } from '../utils/logger'
 
-// Funcionando
+// Exemplo de como usar nos logs
 export async function createUserTable() {
     try {
         const createdTable = await createUserTableDb()
 
         if (createdTable) {
-            console.log(`\nTabela users criada com sucesso!`)
+            console.log(`${getCurrentTime()} - Tabela users criada com sucesso!`)
         }
     } catch (error) {
-        console.log(`\nErro ao criar a tabela users: ${error}`)
+        console.log(`${getCurrentTime()} - Erro ao criar a tabela users: ${error}`)
     }
 }
 
-// Funcionando
 export async function createUser(name: string, email: string, password: string) {
     const user: User = {
         name,
@@ -26,9 +26,9 @@ export async function createUser(name: string, email: string, password: string) 
     const validation = validateUser(user)
 
     if (!validation.success) {
-        console.log("\nErros de validação ao inserir usuário:")
+        console.log(`${getCurrentTime()} - Erros de validação ao inserir usuário:`)
         validation.error.errors.forEach((err) => {
-            console.log(`- ${err.path.join(".")}: ${err.message}`)
+            console.log(`${getCurrentTime()} - - ${err.path.join(".")}: ${err.message}`)
         })
         return
     }
@@ -37,25 +37,40 @@ export async function createUser(name: string, email: string, password: string) 
         const createdUser = await createUserDb(user)
 
         if (createdUser) {
-            console.log(`\nUsuário inserido com sucesso!`)
+            console.log(`${getCurrentTime()} - Usuário inserido com sucesso!`)
         }
     } catch (error) {
-        console.log(`\nErro ao criar usuário: ${error}}`)
+        console.log(`${getCurrentTime()} - Erro ao criar usuário: ${error}}`)
     }
 }
 
-// Funcionando
 export async function listAllUsers() {
     try {
         const users = await listAllUsersDb()  
 
         if (users && users.length > 0) {
-            console.log(`\nUsuários cadastrados:`)
+            console.log(`${getCurrentTime()} - Usuários cadastrados:`)
             console.log(users)  
         } else {
-            console.log('Nenhum usuário encontrado.')
+            console.log(`${getCurrentTime()} - Nenhum usuário encontrado.`)
         }
     } catch (error) {
-        console.error(error) 
+        console.error(`${getCurrentTime()} - Erro ao listar usuários: ${error}`) 
+    }
+}
+
+// Funcionando
+export async function listUserById(id: number) {
+    const user = await listUserByIdDb(id)
+    
+    try {
+        if (user) {
+            console.log(`${getCurrentTime()} - Usuário cadastrado:`)
+            console.log(user)  
+        } else {
+            console.log(`${getCurrentTime()} - Nenhum usuário encontrado através do id '${id}'.`)
+        }
+    } catch (error) {
+        console.log(`${getCurrentTime()} - Erro ao listar usuário: ${error}`)
     }
 }
