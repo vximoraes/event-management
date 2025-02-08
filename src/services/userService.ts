@@ -99,18 +99,21 @@ export function updateUserDb(user: User): Promise<any> {
     })
 }
 
-export function deleteUserDb(id: number) {
+// Funcionando
+export function deleteUserDb(id: number): Promise<any> {
     const query = `
         DELETE FROM users WHERE id = ?
     `
 
-    db.run(query, [id], function (erro) {
-        if (erro) {
-            console.log(`Erro ao deletar usuário: ${erro}`)
-        } if (this.changes === 0) {
-            console.log(`Nenhum usuário encontrado pelo id ${id}`)
-        } else {
-            console.log(`Usuário ${id} deletado com sucesso!`)
-        }
+    return new Promise((resolve, reject) => {
+        db.run(query, [id], function (error) {
+            if (error) {
+                reject(error)
+            } else if (this.changes === 0) {
+                resolve(false)
+            } else {
+                resolve(true)
+            }
+        })
     })
 }
