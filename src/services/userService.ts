@@ -1,5 +1,5 @@
-import { User } from './../models/userModel'
 import sqlite3 from "sqlite3"
+import { User } from './../models/userModel'
 
 const db = new sqlite3.Database('./data/database.db')
 
@@ -78,21 +78,24 @@ export function listUserByIdDb(id: number): Promise<any> {
     })
 }
 
-export function updateUserByIdDb(user: User) {
+// Funcionando
+export function updateUserByIdDb(user: User): Promise<any> {
     const query = `
         UPDATE users 
         SET name = ?, email = ?, password = ?
         WHERE id = ?
     `
 
-    db.run(query, [user.name, user.email, user.password, user.id], function (error) {
-        if (error) {
-            console.log(`Erro ao alterar usuário: ${error}`)
-        } else if (this.changes === 0) {
-            console.log(`Nenhum usuário encontrado pelo id ${user.id}`)
-        } else {
-            console.log(`Usuário ${user.id} alterado com sucesso!`)
-        }
+    return new Promise((resolve, reject) => {
+        db.run(query, [user.name, user.email, user.password, user.id], function (error) {
+            if (error) {
+                reject(error)
+            } else if (this.changes === 0) {
+                resolve(false)
+            } else {
+                resolve(true)
+            }
+        })
     })
 }
 
