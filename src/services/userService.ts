@@ -65,10 +65,10 @@ export function listUserByIdDb(id: number): Promise<any> {
         SELECT * FROM users WHERE id = ?
     `
 
-    return new Promise((resolve, rejected) => {
+    return new Promise((resolve, reject) => {
         db.get(query, [id], (error, row) => {
             if (error) {
-                rejected(error)
+                reject(error)
             } else if (row) {
                 resolve(row)
             } else {
