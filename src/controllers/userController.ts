@@ -1,6 +1,6 @@
 import { User } from './../models/userModel';
 import { validateUser } from '../validations/userValidation'
-import { createUserDb, createUserTableDb, listAllUsersDb, listUserByIdDb, updateUserByIdDb } from '../services/userService'
+import { createUserDb, createUserTableDb, listAllUsersDb, listUserDb, updateUserDb } from '../services/userService'
 import { getCurrentTime } from '../utils/logger'
 
 // Funcionando
@@ -62,9 +62,9 @@ export async function listAllUsers() {
 }
 
 // Funcionando
-export async function listUserById(id: number) {
+export async function listUser(id: number) {
     try {
-        const listedUser = await listUserByIdDb(id)
+        const listedUser = await listUserDb(id)
 
         if (listedUser) {
             console.log(`${getCurrentTime()} - Usuário com id '${id}':`)
@@ -78,7 +78,7 @@ export async function listUserById(id: number) {
 }
 
 // Funcionando
-export async function updateUserById(id: number, name: string, email: string, password: string) {
+export async function updateUser(id: number, name: string, email: string, password: string) {
     const updateUser: User = {
         id,
         name,
@@ -97,7 +97,7 @@ export async function updateUserById(id: number, name: string, email: string, pa
     }
 
     try {
-        const updatedUser = await updateUserByIdDb(updateUser)
+        const updatedUser = await updateUserDb(updateUser)
 
         if (updatedUser) {
             console.log(`${getCurrentTime()} - Usuário '${updateUser.id}' alterado com sucesso!`)
@@ -107,4 +107,8 @@ export async function updateUserById(id: number, name: string, email: string, pa
     } catch (error) {
         console.log(`${getCurrentTime()} - Erro ao alterar usuário: ${error}`);
     }
+}
+
+export async function deleteUser() {
+
 }
