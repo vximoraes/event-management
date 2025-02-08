@@ -60,7 +60,7 @@ export function listAllUsersDb(): Promise<any[]> {
 }
 
 // Funcionando
-export function listUserByIdDb(id: number): Promise<any> {
+export function listUserDb(id: number): Promise<any> {
     const query = `
         SELECT * FROM users WHERE id = ?
     `
@@ -79,7 +79,7 @@ export function listUserByIdDb(id: number): Promise<any> {
 }
 
 // Funcionando
-export function updateUserByIdDb(user: User): Promise<any> {
+export function updateUserDb(user: User): Promise<any> {
     const query = `
         UPDATE users 
         SET name = ?, email = ?, password = ?
