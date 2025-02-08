@@ -1,6 +1,6 @@
-import { User } from './../models/userModel';
+import { User } from './../models/userModel'
 import { validateUser } from '../validations/userValidation'
-import { createUserDb, createUserTableDb, listAllUsersDb, listUserDb, updateUserDb } from '../services/userService'
+import { createUserDb, createUserTableDb, deleteUserDb, listAllUsersDb, listUserDb, updateUserDb } from '../services/userService'
 import { getCurrentTime } from '../utils/logger'
 
 // Funcionando
@@ -102,13 +102,24 @@ export async function updateUser(id: number, name: string, email: string, passwo
         if (updatedUser) {
             console.log(`${getCurrentTime()} - Usuário '${updateUser.id}' alterado com sucesso!`)
         } else {
-            console.log(`${getCurrentTime()} - Nenhum usuário encontrado através do id '${updateUser.id}.'`);
+            console.log(`${getCurrentTime()} - Nenhum usuário encontrado através do id '${updateUser.id}.'`)
         }
     } catch (error) {
-        console.log(`${getCurrentTime()} - Erro ao alterar usuário: ${error}`);
+        console.log(`${getCurrentTime()} - Erro ao alterar usuário: ${error}`)
     }
 }
 
-export async function deleteUser() {
+// Funcionando
+export async function deleteUser(id: number) {
+    try {
+        const deletedUser = await deleteUserDb(id)
 
+        if (deletedUser) {
+            console.log(`${getCurrentTime()} - Usuário com id '${id}' deletado com sucesso!`)
+        } else {
+            console.log(`${getCurrentTime()} - Nenhum usuário encontrado através do id '${id}.'`)
+        }
+    } catch (error) {
+        console.log(`${getCurrentTime()} - Erro ao deletar usuário: ${error}`)
+    }
 }
