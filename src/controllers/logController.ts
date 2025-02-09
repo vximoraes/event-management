@@ -1,7 +1,6 @@
 import { createLogsTableDb } from "../services/logService";
 import { getCurrentTime } from "../utils/loggerUtils";
 
-// Função para criar a tabela de logs
 export async function createLogsTable() {
     try {
         const createdTable = await createLogsTableDb();
