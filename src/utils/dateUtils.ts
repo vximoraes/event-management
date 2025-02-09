@@ -1,4 +1,3 @@
-// Função para formatar a data
 export function formatEventDate(date: Date): string {
     return date.toLocaleString('pt-BR', {
         day: '2-digit',
