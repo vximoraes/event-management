@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/vximoraes/event-management#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "nodemon": "^3.1.9",
     "sqlite3": "^5.1.7",
     "ts-node": "^10.9.2",
