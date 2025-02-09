@@ -4,7 +4,6 @@ import { User } from "../models/userModel"
 
 const db = new sqlite3.Database('./data/database.db')
 
-// Funcionando
 export function createLogsTableDb(): Promise<boolean> {
     const query = `
         CREATE TABLE IF NOT EXISTS logs (
@@ -29,7 +28,6 @@ export function createLogsTableDb(): Promise<boolean> {
     })
 }
 
-// Funcionando
 export function createLogDb(action: string, entity: string, user_id: number): Promise<boolean> {
     const query = `
         INSERT INTO logs (action, entity, user_id, user_name, timestamp)
@@ -39,7 +37,6 @@ export function createLogDb(action: string, entity: string, user_id: number): Pr
     return new Promise((resolve, reject) => {
         const timestamp = formatEventDate(new Date())
 
-        // Buscar o nome do usuário
         const userQuery = `SELECT name FROM users WHERE id = ?`
 
         db.get(userQuery, [user_id], (error, row: User) => {
