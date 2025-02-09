@@ -103,6 +103,6 @@ export async function deleteEvent(id: number) {
             console.log(`${getCurrentTime()} - Nenhum evento encontrado através do id '${id}.'`)
         }
     } catch (error) {
-        console.log(`${getCurrentTime()} - Erro de log ao deletar evento, usuário não: ${error}`)
+        console.log(`${getCurrentTime()} - Erro de log ao deletar evento, usuário não existente: ${error}`)
     }
 }
