@@ -142,7 +142,6 @@ async function userMenu() {
     await userMenu() 
 }
 
-// Exporta a função principal para ser usada no index.ts  
 export async function main() {
     await mainMenu() 
 }
