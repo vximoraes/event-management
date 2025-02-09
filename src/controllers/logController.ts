@@ -7,7 +7,7 @@ export async function createLogsTable() {
         const createdTable = await createLogsTableDb();
 
         if (createdTable) {
-            console.log(`${getCurrentTime()} - Tabela logs criada com sucesso!`);
+            // console.log(`${getCurrentTime()} - Tabela logs criada com sucesso!`);
         }
     } catch (error) {
         console.error(`${getCurrentTime()} - Erro ao criar a tabela logs: ${error}`);
