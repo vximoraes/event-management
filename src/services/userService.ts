@@ -3,7 +3,6 @@ import { User } from './../models/userModel'
 
 const db = new sqlite3.Database('./data/database.db')
 
-// Funcionando
 export function createUserTableDb(): Promise<boolean> {
     const query = `
         CREATE TABLE IF NOT EXISTS users (
@@ -25,7 +24,6 @@ export function createUserTableDb(): Promise<boolean> {
     })
 }
 
-// Funcionando
 export function createUserDb(user: User): Promise<boolean> {
     const query = `
         INSERT INTO users (name, email, password)
@@ -43,7 +41,6 @@ export function createUserDb(user: User): Promise<boolean> {
     })
 }
 
-// Funcionando
 export function listAllUsersDb(): Promise<any[]> {
     const query = `
         SELECT * FROM users
@@ -59,7 +56,6 @@ export function listAllUsersDb(): Promise<any[]> {
     })
 }
 
-// Funcionando
 export function listUserDb(id: number): Promise<any> {
     const query = `
         SELECT * FROM users WHERE id = ?
@@ -78,7 +74,6 @@ export function listUserDb(id: number): Promise<any> {
     })
 }
 
-// Funcionando
 export function updateUserDb(user: User): Promise<any> {
     const query = `
         UPDATE users 
@@ -99,7 +94,6 @@ export function updateUserDb(user: User): Promise<any> {
     })
 }
 
-// Funcionando
 export function deleteUserDb(id: number): Promise<any> {
     const query = `
         DELETE FROM users WHERE id = ?
