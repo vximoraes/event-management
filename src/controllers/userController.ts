@@ -1,7 +1,7 @@
 import { User } from './../models/userModel'
 import { validateUser } from '../validations/userValidation'
 import { createUserDb, createUserTableDb, deleteUserDb, listAllUsersDb, listUserDb, updateUserDb } from '../services/userService'
-import { getCurrentTime } from '../utils/logger'
+import { getCurrentTime } from '../utils/loggerUtils'
 
 // Funcionando
 export async function createUserTable() {
@@ -41,7 +41,7 @@ export async function createUser(name: string, email: string, password: string) 
             console.log(`${getCurrentTime()} - Usuário inserido com sucesso!`)
         }
     } catch (error) {
-        console.log(`${getCurrentTime()} - Erro ao criar usuário: ${error}}`)
+        console.log(`${getCurrentTime()} - Erro ao inserir usuário: ${error}}`)
     }
 }
 
