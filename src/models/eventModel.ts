@@ -1,8 +1,6 @@
-import { User } from "./userModel"
-
 export interface Event {
-    id  : string,
+    id? : number,
     name: string,
     date: Date,
-    user: User
+    user_id: number
 }
