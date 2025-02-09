@@ -9,7 +9,7 @@ export async function createUserTable() {
         const createdTable = await createUserTableDb()
 
         if (createdTable) {
-            console.log(`${getCurrentTime()} - Tabela users criada com sucesso!`)
+            // console.log(`${getCurrentTime()} - Tabela users criada com sucesso!`)
         }
     } catch (error) {
         console.log(`${getCurrentTime()} - Erro ao criar a tabela users: ${error}`)
