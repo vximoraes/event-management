@@ -1,16 +1,17 @@
 import { createEvent, createEventTable, deleteEvent, listAllEvents, listEvent, updateEvent } from "./controllers/eventController"
 import { createLogsTable } from "./controllers/logController"
 import { createUser, createUserTable, deleteUser, listAllUsers, listUser, updateUser } from "./controllers/userController"
+import { main } from './cli/cli';  
 
 // ------------- Logs ------------
 
 // Criar a tabela de logs
-// createLogsTable()
+createLogsTable()
 
 // ------------ Users ------------
 
 // Criar a tabela de usuários
-// createUserTable()
+createUserTable()
 
 // Criar user 1
 // createUser("Vini", "vinicius@gmail.com", "12345678@Senha")
@@ -36,7 +37,7 @@ import { createUser, createUserTable, deleteUser, listAllUsers, listUser, update
 // ----------- Eventos -----------
 
 // Criar a tabela de eventos
-// createEventTable()
+createEventTable()
 
 // Criar um evento
 // createEvent("Meu evento", new Date(), 1)
@@ -52,3 +53,6 @@ import { createUser, createUserTable, deleteUser, listAllUsers, listUser, update
 
 // Deletar o evento de ID 6
 // deleteEvent(1)
+
+// Chama a função principal da CLI  
+main()
