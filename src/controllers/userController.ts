@@ -3,7 +3,6 @@ import { validateUser } from '../validations/userValidation'
 import { createUserDb, createUserTableDb, deleteUserDb, listAllUsersDb, listUserDb, updateUserDb } from '../services/userService'
 import { getCurrentTime } from '../utils/loggerUtils'
 
-// Funcionando
 export async function createUserTable() {
     try {
         const createdTable = await createUserTableDb()
@@ -16,7 +15,6 @@ export async function createUserTable() {
     }
 }
 
-// Funcionando
 export async function createUser(name: string, email: string, password: string) {
     const user: User = {
         name,
@@ -45,7 +43,6 @@ export async function createUser(name: string, email: string, password: string) 
     }
 }
 
-// Funcionando
 export async function listAllUsers() {
     try {
         const listedUsers = await listAllUsersDb()
@@ -61,7 +58,6 @@ export async function listAllUsers() {
     }
 }
 
-// Funcionando
 export async function listUser(id: number) {
     try {
         const listedUser = await listUserDb(id)
@@ -77,7 +73,6 @@ export async function listUser(id: number) {
     }
 }
 
-// Funcionando
 export async function updateUser(id: number, name: string, email: string, password: string) {
     const updateUser: User = {
         id,
@@ -109,7 +104,6 @@ export async function updateUser(id: number, name: string, email: string, passwo
     }
 }
 
-// Funcionando
 export async function deleteUser(id: number) {
     try {
         const deletedUser = await deleteUserDb(id)
