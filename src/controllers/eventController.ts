@@ -4,7 +4,6 @@ import { createEventDb, createEventTableDb, deleteEventDb, listAllEventsDb, list
 import { createLogDb } from '../services/logService'
 import { validateEvent } from '../validations/eventValidation'
 
-// Funcionando
 export async function createEventTable() {
     try {
         const createdTable = await createEventTableDb()
@@ -17,7 +16,6 @@ export async function createEventTable() {
     }
 }
 
-// Funcionando
 export async function createEvent(name: string, date: Date, user_id: number) {
     const event: Event = {
         name,
@@ -47,7 +45,6 @@ export async function createEvent(name: string, date: Date, user_id: number) {
     }
 }
 
-// Funcionando
 export async function listAllEvents() {
     try {
         const listedEvents = await listAllEventsDb()
@@ -63,7 +60,6 @@ export async function listAllEvents() {
     }
 }
 
-// Funcionando
 export async function listEvent(id: number) {
     try {
         const listedEvent = await listEventDb(id)
@@ -79,7 +75,6 @@ export async function listEvent(id: number) {
     }
 }
 
-// Funcionando
 export async function updateEvent(id: number, name: string, date: Date, user_id: number) {
     const updateEvent: Event = {
         id,
@@ -112,7 +107,6 @@ export async function updateEvent(id: number, name: string, date: Date, user_id:
     }
 }
 
-// Funcionando
 export async function deleteEvent(id: number) {
     try {
         const deletedEvent = await deleteEventDb(id)
