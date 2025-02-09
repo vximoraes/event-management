@@ -2,6 +2,7 @@ import { Event } from './../models/eventModel'
 import { getCurrentTime } from '../utils/loggerUtils'
 import { createEventDb, createEventTableDb, deleteEventDb, listAllEventsDb, listEventDb, updateEventDb } from '../services/eventService'
 import { createLogDb } from '../services/logService'
+import { validateEvent } from '../validations/eventValidation'
 
 // Funcionando
 export async function createEventTable() {
@@ -9,7 +10,7 @@ export async function createEventTable() {
         const createdTable = await createEventTableDb()
 
         if (createdTable) {
-            console.log(`${getCurrentTime()} - Tabela events criada com sucesso!`)
+            // console.log(`${getCurrentTime()} - Tabela events criada com sucesso!`)
         }
     } catch (error) {
         console.log(`${getCurrentTime()} - Erro ao criar a tabela events: ${error}`)
@@ -22,6 +23,16 @@ export async function createEvent(name: string, date: Date, user_id: number) {
         name,
         date,
         user_id
+    }
+
+    const validation = validateEvent(event)
+
+    if (!validation.success) {
+        console.log(`${getCurrentTime()} - Erros de validação ao inserir evento:`)
+        validation.error.errors.forEach((err) => {
+            console.log(`${getCurrentTime()} - - ${err.path.join(".")}: ${err.message}`)
+        })
+        return
     }
 
     try {
@@ -75,6 +86,16 @@ export async function updateEvent(id: number, name: string, date: Date, user_id:
         name,
         date,
         user_id
+    }
+    
+    const validation = validateEvent(updateEvent)
+
+    if (!validation.success) {
+        console.log(`${getCurrentTime()} - Erros de validação ao atualizar evento:`)
+        validation.error.errors.forEach((err) => {
+            console.log(`${getCurrentTime()} - - ${err.path.join(".")}: ${err.message}`)
+        })
+        return
     }
 
     try {
