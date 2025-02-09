@@ -4,10 +4,8 @@ import { formatEventDate } from "../utils/dateUtils"
 
 const db = new sqlite3.Database('./data/database.db')
 
-// Ativa a verificação de chaves estrangeiras
 db.run('PRAGMA foreign_keys = ON')
 
-// Funcionando
 export function createEventTableDb(): Promise<boolean> {
     const query = `
         CREATE TABLE IF NOT EXISTS events (
@@ -30,7 +28,6 @@ export function createEventTableDb(): Promise<boolean> {
     })
 }
 
-// Funcionando
 export function createEventDb(event: Event): Promise<any> {
     const query = `
         INSERT INTO events (name, date, user_id)
@@ -49,7 +46,6 @@ export function createEventDb(event: Event): Promise<any> {
     })
 }
 
-// Funcionando
 export function listAllEventsDb(): Promise<any[]> {
     const query = `
         SELECT * FROM events
@@ -65,7 +61,6 @@ export function listAllEventsDb(): Promise<any[]> {
     })
 }
 
-// Funcionando
 export function listEventDb(id: number): Promise<any> {
     const query = `
         SELECT * FROM events WHERE id = ?
@@ -84,7 +79,6 @@ export function listEventDb(id: number): Promise<any> {
     })
 }
 
-// Funcionando
 export function updateEventDb(event: Event): Promise<any> {
     const query = `
         UPDATE events 
@@ -106,7 +100,6 @@ export function updateEventDb(event: Event): Promise<any> {
     })
 }
 
-// Funcionando
 export function deleteEventDb(id: number): Promise<any> {
     const query = `
         DELETE FROM events WHERE id = ?
