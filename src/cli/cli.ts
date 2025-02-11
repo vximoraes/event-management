@@ -1,6 +1,7 @@
 import inquirer from 'inquirer'
 import * as eventController from '../controllers/eventController'
 import * as userController from '../controllers/userController'
+import { getCurrentTime } from '../utils/loggerUtils'
 
 async function mainMenu() {
     const { option } = await inquirer.prompt([
@@ -21,7 +22,7 @@ async function mainMenu() {
     } else if (option === 'users') {
         await userMenu()
     } else {
-        console.log('Até logo!')
+        console.log(`${getCurrentTime()} -  Até logo!`)
         process.exit(0)
     }
 
@@ -76,7 +77,21 @@ async function eventMenu() {
             const { deleteId } = await inquirer.prompt([
                 { type: 'number', name: 'deleteId', message: 'ID do evento a ser deletado:' }
             ])
-            await eventController.deleteEvent(deleteId)
+        
+            const { confirmDelete } = await inquirer.prompt([
+                {
+                    type: 'confirm',
+                    name: 'confirmDelete',
+                    message: `Você tem certeza que deseja deletar o evento de ID ${deleteId}?`,
+                    default: false 
+                }
+            ])
+        
+            if (confirmDelete) {
+                await eventController.deleteEvent(deleteId)
+            } else {
+                console.log(`${getCurrentTime()} - Operação de exclusão cancelada!`)
+            }
             break
         case 'back':
             return  
