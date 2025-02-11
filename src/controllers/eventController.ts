@@ -67,8 +67,10 @@ export async function listEvent(id: number) {
         if (listedEvent) {
             console.log(`${getCurrentTime()} - Evento com id '${id}':`)
             console.log(listedEvent)
+            return listedEvent
         } else {
             console.log(`${getCurrentTime()} - Nenhum evento encontrado através do id '${id}'.`)
+            return false
         }
     } catch (error) {
         console.log(`${getCurrentTime()} - Erro ao listar evento: ${error}`)
@@ -109,13 +111,16 @@ export async function updateEvent(id: number, name: string, date: Date, user_id:
 
 export async function deleteEvent(id: number) {
     try {
+        const { user_id } = await listEvent(id)
+
         const deletedEvent = await deleteEventDb(id)
 
         if (deletedEvent) {
             console.log(`${getCurrentTime()} - Evento com id '${id}' deletado com sucesso!`)
-            await createLogDb('DELETE', 'Event', id)
+            await createLogDb('DELETE', 'Event', user_id)
+            return true
         } else {
-            console.log(`${getCurrentTime()} - Nenhum evento encontrado através do id '${id}.'`)
+            return false
         }
     } catch (error) {
         console.log(`${getCurrentTime()} - Erro de log ao deletar evento, usuário não existente: ${error}`)
