@@ -1,5 +1,5 @@
 import sqlite3 from "sqlite3"
-import { formatEventDate } from "../utils/dateUtils"
+import { formatDateTime, formatEventDate } from "../utils/dateUtils"
 import { User } from "../models/userModel"
 
 const db = new sqlite3.Database('./data/database.db')
@@ -35,7 +35,7 @@ export function createLogDb(action: string, entity: string, user_id: number): Pr
     `
 
     return new Promise((resolve, reject) => {
-        const timestamp = formatEventDate(new Date())
+        const timestamp = formatDateTime(new Date())
 
         const userQuery = `SELECT name FROM users WHERE id = ?`
 
