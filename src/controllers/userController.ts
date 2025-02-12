@@ -2,6 +2,7 @@ import { User } from './../models/userModel'
 import { validateUser } from '../validations/userValidation'
 import { createUserDb, createUserTableDb, deleteUserDb, listAllUsersDb, listUserDb, updateUserDb } from '../services/userService'
 import { getCurrentTime } from '../utils/loggerUtils'
+import { hashPassword } from '../utils/userPasswordUtils'
 
 export async function createUserTable() {
     try {
@@ -16,10 +17,12 @@ export async function createUserTable() {
 }
 
 export async function createUser(name: string, email: string, password: string) {
+    const hashedPassword = await hashPassword(password)
+    
     const user: User = {
         name,
         email,
-        password
+        password: hashedPassword    
     }
 
     const validation = validateUser(user)
@@ -74,11 +77,13 @@ export async function listUser(id: number) {
 }
 
 export async function updateUser(id: number, name: string, email: string, password: string) {
+    const hashedPassword = await hashPassword(password)
+    
     const updateUser: User = {
         id,
         name,
         email,
-        password
+        password: hashedPassword
     }
 
     const validation = validateUser(updateUser)
