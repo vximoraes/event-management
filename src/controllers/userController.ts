@@ -2,7 +2,7 @@ import { User } from './../models/userModel'
 import { validateUser } from '../validations/userValidation'
 import { createUserDb, createUserTableDb, deleteUserDb, listAllUsersDb, listUserDb, updateUserDb } from '../services/userService'
 import { getCurrentTime } from '../utils/loggerUtils'
-import { hashPassword } from '../utils/userPasswordUtils'
+import { hashPassword } from '../utils/passwordUtils'
 
 export async function createUserTable() {
     try {
