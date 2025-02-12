@@ -148,8 +148,22 @@ async function userMenu() {
             const { deleteId } = await inquirer.prompt([
                 { type: 'number', name: 'deleteId', message: 'ID do usuário a ser deletado:' }
             ])
-            await userController.deleteUser(deleteId)
-            break
+        
+            const { confirmDelete } = await inquirer.prompt([
+                {
+                    type: 'confirm',
+                    name: 'confirmDelete',
+                    message: `Você tem certeza que deseja deletar o usuário de ID ${deleteId}?`,
+                    default: false 
+                }
+            ])
+        
+            if (confirmDelete) {
+                await userController.deleteUser(deleteId)
+            } else {
+                console.log(`${getCurrentTime()} - Operação de exclusão cancelada!`)
+            }
+            break            
         case 'back':
             return 
     }
